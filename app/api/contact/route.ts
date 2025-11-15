@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 // Simple in-memory rate limiter (IP -> timestamps)
 const rateLimitMap = new Map<string, number[]>();
@@ -93,6 +95,9 @@ async function sendEmail(data: ContactFormData, clientIP: string): Promise<{ ok:
       console.error('Missing SMTP configuration');
       return { ok: false, error: 'E-posta servisi şu anda kullanılamıyor' };
     }
+
+    // Dynamic import for serverless compatibility
+    const nodemailer = (await import('nodemailer')).default;
 
     // Create transporter
     const transporter = nodemailer.createTransport({
