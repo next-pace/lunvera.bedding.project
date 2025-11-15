@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants, easeOut } from 'framer-motion';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -159,21 +159,21 @@ export default function ContactPage() {
     }
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: easeOut },
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
+      transition: { duration: 0.5, ease: easeOut },
     },
   };
 
@@ -542,7 +542,7 @@ export default function ContactPage() {
               <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
                 <iframe
                   src="https://www.google.com/maps?q=Demirhendek%20Cd%20No:49%2006360%20Altındağ%20Ankara&output=embed"
-                  allowFullScreen=""
+                  allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full border-0"
