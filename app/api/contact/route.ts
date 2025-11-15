@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { Transporter } from 'nodemailer';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -97,10 +98,10 @@ async function sendEmail(data: ContactFormData, clientIP: string): Promise<{ ok:
     }
 
     // Dynamic import for serverless compatibility
-    const nodemailer = (await import('nodemailer')).default;
+    const { default: nodemailer } = await import('nodemailer');
 
     // Create transporter
-    const transporter = nodemailer.createTransport({
+    const transporter: Transporter = nodemailer.createTransport({
       host: smtpHost,
       port: parseInt(smtpPort, 10),
       secure: parseInt(smtpPort, 10) === 465,
